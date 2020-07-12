@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -30,19 +32,19 @@ class UsersController extends Controller
     //登録
     public function register(Request $request)
     {
-        //入力チェック
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required',
-        // ]);
+        // 入力チェック
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+        ]);
 
-        // if ($validator->fails()) {
-        //   return response()->json([
-        //     'success' => false,
-        //     'message' => $validator->errors(),
-        //   ], 401);
-        // }
+        if ($validator->fails()) {
+          return response()->json([
+            'success' => false,
+            'message' => $validator->errors(),
+          ], 401);
+        }
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
@@ -52,7 +54,7 @@ class UsersController extends Controller
           'success' => true,
           'token' => $success,
           'user' => $user
-      ]);
+        ]);
     }
 
     //ログアウト(アプリ実装なし)
