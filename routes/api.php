@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/login', 'UsersController@login');
 Route::post('/register', 'UsersController@register');
 Route::get('/logout', 'UsersController@logout')->middleware('auth:api');
+
+Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
+    Route::get('/index','ExtensionController@index');
+    Route::get('/addlist','ExtensionController@exAddList');
+});
