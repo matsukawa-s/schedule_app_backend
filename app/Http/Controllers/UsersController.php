@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Calendar;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -47,14 +49,24 @@ class UsersController extends Controller
         }
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] = $user->createToken('appToken')->accessToken;
-        return response()->json([
-          'success' => true,
-          'token' => $success,
-          'user' => $user
-        ]);
+
+        DB::transaction(function () use($input){
+          $input['password'] = bcrypt($input['password']);
+          $user = User::create($input);
+          $success['token'] = $user->createToken('appToken')->accessToken;
+
+          //登録した時に最初のカレンダーを作る
+          Calendar::create([
+            'cal_name' => '基本のカレンダー',
+            'user_id' => $user->id
+          ]);
+
+          return response()->json([
+            'success' => true,
+            'token' => $success,
+            'user' => $user
+          ]);
+        });
     }
 
     //ログアウト(アプリ実装なし)

@@ -17,7 +17,7 @@ class CalendarUserTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('calendar_id');//カレンダーID
-            $table->unsignedBigInteger('user_id');//拡張機能ID
+            $table->unsignedBigInteger('user_id');//ユーザーID
             $table->timestamps();
 
             //外部キー
