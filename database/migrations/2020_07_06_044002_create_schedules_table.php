@@ -17,8 +17,8 @@ class CreateSchedulesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');//タイトル
             $table->boolean('all_day');//終日 
-            $table->date('start_date');//開始日
-            $table->date('end_date');//終了日
+            $table->datetime('start_date');//開始日
+            $table->datetime('end_date');//終了日
             $table->boolean('notification_flag');//通知フラグ
             $table->Integer('notification');//通知
             $table->boolean('repetition_flag');//繰り返しフラグ
