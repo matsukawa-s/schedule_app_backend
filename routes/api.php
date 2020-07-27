@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::post('/login', 'UsersController@login');
 Route::post('/register', 'UsersController@register');
 Route::get('/logout', 'UsersController@logout')->middleware('auth:api');
@@ -26,6 +27,12 @@ Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
     Route::get('/index','ExtensionController@index');
     Route::get('/addlist','ExtensionController@exAddList');
     Route::post('/calexadd','ExtensionController@calendarExtensionAdd');
+});
+
+Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
+    Route::get('/get/{id}','DiaryController@getDiaryList');
+    Route::post('add','DiaryController@addDiary');
+    Route::post('store','DiaryController@store');
 });
 
 Route::get('/calendar/{id}','SchedulesController@index');
