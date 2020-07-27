@@ -26,3 +26,6 @@ Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
     Route::get('/index','ExtensionController@index');
     Route::get('/addlist','ExtensionController@exAddList');
 });
+
+Route::get('/calendar/{id}','SchedulesController@index');
+Route::get('/schedules/{id}','SchedulesController@show');
