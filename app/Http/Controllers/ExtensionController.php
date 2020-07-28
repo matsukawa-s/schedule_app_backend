@@ -24,11 +24,11 @@ class ExtensionController extends Controller
      * 拡張機能追加画面のデータ
      * @return json
      */
-    public function exAddList(Request $request){
+    public function exAddList(Request $request,$id){
         //拡張機能の一覧とユーザーの現在選択しているのカレンダーの状況を加工して返したい
         // $extensions = Extension::all();
         $data = Extension::all()->toArray();
-        $calendar_id = 1;
+        $calendar_id = $id;
 
         $user = $request->user()->id;
 

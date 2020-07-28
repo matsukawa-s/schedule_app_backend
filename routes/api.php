@@ -25,7 +25,7 @@ Route::get('/logout', 'UsersController@logout')->middleware('auth:api');
 
 Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
     Route::get('/index','ExtensionController@index');
-    Route::get('/addlist','ExtensionController@exAddList');
+    Route::get('/addlist/{id}','ExtensionController@exAddList');
     Route::post('/calexadd','ExtensionController@calendarExtensionAdd');
 });
 
