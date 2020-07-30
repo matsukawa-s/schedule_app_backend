@@ -25,7 +25,7 @@ Route::get('/logout', 'UsersController@logout')->middleware('auth:api');
 
 Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
     Route::get('/index','ExtensionController@index');
-    Route::get('/addlist','ExtensionController@exAddList');
+    Route::get('/addlist/{id}','ExtensionController@exAddList');
     Route::post('/calexadd','ExtensionController@calendarExtensionAdd');
 });
 
@@ -37,5 +37,9 @@ Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
 
 Route::get('/calendar/{id}','SchedulesController@index');
 Route::get('/schedules/{id}','SchedulesController@show');
+<<<<<<< HEAD
 
 Route::post('/schedules/store','SchedulesController@store');
+=======
+Route::get('/schedules/start_date/{date}','SchedulesController@getSchedulesDate');
+>>>>>>> master

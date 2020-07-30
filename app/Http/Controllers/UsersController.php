@@ -17,11 +17,13 @@ class UsersController extends Controller
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             //認証に成功したときトークンをセットしてjsonで返す
             $user = Auth::user();
+            $calendar = Calendar::where('user_id',$user->id)->first();
             $success['token'] = $user->createToken('appToken')->accessToken;
             return response()->json([
               'success' => true,
               'token' => $success,
-              'user' => $user
+              'user' => $user,
+              'calendar' => $calendar
           ]);
         } else {
           return response()->json([
@@ -50,23 +52,26 @@ class UsersController extends Controller
 
         $input = $request->all();
 
-        DB::transaction(function () use($input){
+        $result = DB::transaction(function () use($input){
           $input['password'] = bcrypt($input['password']);
           $user = User::create($input);
           $success['token'] = $user->createToken('appToken')->accessToken;
 
           //登録した時に最初のカレンダーを作る
-          Calendar::create([
+          $calendar = Calendar::create([
             'cal_name' => '基本のカレンダー',
             'user_id' => $user->id
           ]);
 
-          return response()->json([
+          return [
             'success' => true,
             'token' => $success,
-            'user' => $user
-          ]);
+            'user' => $user,
+            'calendar' => $calendar
+          ];
         });
+
+        return response()->json($result);
     }
 
     //ログアウト(アプリ実装なし)
