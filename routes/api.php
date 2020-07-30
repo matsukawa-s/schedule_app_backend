@@ -37,3 +37,5 @@ Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
 
 Route::get('/calendar/{id}','SchedulesController@index');
 Route::get('/schedules/{id}','SchedulesController@show');
+
+Route::post('/schedules/store','SchedulesController@store');

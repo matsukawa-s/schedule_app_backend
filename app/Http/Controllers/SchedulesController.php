@@ -33,4 +33,10 @@ class SchedulesController extends Controller
 
         return response()->json($schedule);
     }
+
+    public function store(Request $request){
+        $input = $request->all();
+        $data = Schedule::create($input);
+        return $data;
+    }
 }
