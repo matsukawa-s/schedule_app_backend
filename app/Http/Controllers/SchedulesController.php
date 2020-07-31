@@ -33,17 +33,4 @@ class SchedulesController extends Controller
 
         return response()->json($schedule);
     }
-
-    /**
-     * 指定した日付の予定を全て取得する
-     * @param start_date
-     * @return json
-     */
-    public function getSchedulesDate($date){
-        $schedules = \App\Schedule::where("start_date",'like',$date.'%')->get();
-        
-        return response()->json($schedules);
-    }
-
-
 }
