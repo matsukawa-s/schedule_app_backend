@@ -30,9 +30,10 @@ Route::group(['prefix' => 'extension','middleware' => 'auth:api'], function () {
 });
 
 Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
-    Route::get('/get/{id}','DiaryController@getDiaryList');
-    Route::post('add','DiaryController@addDiary');
+    Route::get('/get/{id}','DiaryController@getDiaryData');
     Route::post('store','DiaryController@store');
+    Route::post('update/{id}','DiaryController@update');
+    Route::get('delete/{id}','DiaryController@delete');
 });
 
 Route::get('/calendar/{id}','SchedulesController@index');

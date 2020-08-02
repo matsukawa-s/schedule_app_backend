@@ -9,31 +9,59 @@ use App\Diary;
 
 class DiaryController extends Controller
 {
-    public function getDiaryList($id){
+    /**
+     * カレンダーの日記の一覧を取得する
+     * 
+     * @param id カレンダーID
+     * @return json
+     */
+    public function getDiaryData($id){
         $data = Diary::where('calendar_id',$id)->get();
 
         return $data;
     }
-
-    public function addDiary(Request $request){
-        $input = $request->all();
-
-        return $input;
-    }
-
+    
+    /**
+     * カレンダーに日記を保存する
+     * 
+     * @param request
+     * @return json 
+     */
     public function store(Request $request){
         $input = $request->all();
-
-        // $data = Diary::create([
-        //     'date' => $input->date,
-        //     'article' => $input->article,
-        //     'calendar_id' => $input->calendar_id
-        // ]);
         
-        $data = Diary::create($input);
+        $diary = Diary::create($input);
 
-        // return response()->json($data, 200, $headers);
-        return $data;
+        return $diary;
+    }
+    /**
+     * カレンダーの日記を更新する
+     * 
+     * @param request 
+     * @param id 日記ID
+     * @return json
+     */
+    public function update(Request $request,$id){
+        $input = $request->all();
+        $diary = Diary::find($id);
+        $diary->date = $input['date'];
+        $diary->article = $input['article'];
+        $diary->save();
+
+        return $diary;
+    }
+
+    /**
+     * カレンダーの日記を削除する
+     * 
+     * @param Integer $id
+     * @return json
+     */
+    public function delete($id){
+        $diary = Diary::find($id);
+        $diary->delete();
+
+        return $diary;
     }
 
 
