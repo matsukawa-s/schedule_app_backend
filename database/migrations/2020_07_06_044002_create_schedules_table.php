@@ -20,13 +20,13 @@ class CreateSchedulesTable extends Migration
             $table->datetime('start_date');//開始日
             $table->datetime('end_date');//終了日
             $table->boolean('notification_flag');//通知フラグ
-            $table->Integer('notification');//通知
+            $table->string('notification');//通知
             $table->boolean('repetition_flag');//繰り返しフラグ
             $table->Integer('repetition');//繰り返し
-            $table->string('memo');//メモ
+            $table->string('memo')->nullable();//メモ
             $table->string('color');//色
-            $table->string('place');//場所
-            $table->string('url');//URL
+            $table->string('place')->nullable();//場所
+            $table->string('url')->nullable();//URL
             $table->unsignedBigInteger('calendar_id');//カレンダーID
             $table->timestamps();
 
