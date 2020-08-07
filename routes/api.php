@@ -36,6 +36,11 @@ Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
     Route::get('delete/{id}','DiaryController@delete');
 });
 
+Route::group(['prefix' => 'calendar','middleware' => 'auth:api'], function () {
+    Route::get('/get','CalendarController@getUserCalendar');
+    Route::post('store','CalendarController@store');
+});
+
 Route::get('/calendar/{id}','SchedulesController@index');
 Route::get('/schedules/{id}','SchedulesController@show');
 
