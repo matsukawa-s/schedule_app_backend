@@ -40,4 +40,5 @@ Route::get('/calendar/{id}','SchedulesController@index');
 Route::get('/schedules/{id}','SchedulesController@show');
 
 Route::post('/schedules/store','SchedulesController@store');
+Route::post('/schedules/update/{id}','SchedulesController@update');
 Route::get('/schedules/start_date/{date}','SchedulesController@getSchedulesDate');
