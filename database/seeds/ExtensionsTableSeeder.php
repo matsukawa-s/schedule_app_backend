@@ -15,5 +15,10 @@ class ExtensionsTableSeeder extends Seeder
             'ex_name' => '日記',
             'explanation' => '日々の出来事を記録できます。',
         ]);
+
+        DB::table('extensions')->insert([
+            'ex_name' => 'ToDo',
+            'explanation' => '手軽にタスクの管理ができます。',
+        ]);
     }
 }
