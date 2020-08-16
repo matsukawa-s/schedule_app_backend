@@ -18,19 +18,19 @@ class CreateTasksTable extends Migration
             $table->string('task_name');//タスク名
             $table->boolean('status');//状態　0:未完了, 1:完了
             $table->datetime('date')->nullable();//タスク日
-            $table->unsignedBigInteger('taskgroup_id');//タスクグループID
             $table->unsignedBigInteger('user_id');//ユーザーID(作成者)
+            $table->unsignedBigInteger('calendar_id');//カレンダーID
             $table->timestamps();
 
             //外部キー
-            $table->foreign('taskgroup_id')
-                ->references('id')
-                ->on('taskgroups')
-                ->onDelete('cascade');
-
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+            
+            $table->foreign('calendar_id')
+                ->references('id')
+                ->on('calendars')
                 ->onDelete('cascade');
         });
     }
