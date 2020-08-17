@@ -34,12 +34,25 @@ class SchedulesController extends Controller
         return response()->json($schedule);
     }
 
+    /**
+     * 予定を保存する
+     * 
+     * @param request
+     * @return json 
+     */
     public function store(Request $request){
         $input = $request->all();
         $data = Schedule::create($input);
         return $data;
     }
 
+    /**
+     * 予定を更新する
+     * 
+     * @param request 
+     * @param id スケジュールID
+     * @return json
+     */
     public function update(Request $request,$id){
         $input = $request->all();
         $schedule = Schedule::find($id);
@@ -59,6 +72,20 @@ class SchedulesController extends Controller
 
         return $schedule;
     }
+    
+    /**
+     * 予定を削除する
+     * 
+     * @param Integer $id
+     * @return json
+     */
+    public function delete($id){
+        $schedule = Schedule::find($id);
+        $schedule->delete();
+
+        return $schedule;
+    }
+
     /**
      * 指定した日付の予定を全て取得する
      * @param start_date
