@@ -44,5 +44,11 @@ Route::group(['prefix' => 'calendar','middleware' => 'auth:api'], function () {
 Route::get('/calendar/{id}','SchedulesController@index');
 Route::get('/schedules/{id}','SchedulesController@show');
 
-Route::post('/schedules/store','SchedulesController@store');
+Route::group(['prefix' => 'schedules','middleware' => 'auth:api'], function () {
+    Route::post('store','SchedulesController@store');
+    Route::post('update/{id}','SchedulesController@update');
+    Route::get('delete/{id}','SchedulesController@delete');
+});
+// Route::post('/schedules/store','SchedulesController@store');
+// Route::post('/schedules/update/{id}','SchedulesController@update');
 Route::get('/schedules/start_date/{date}','SchedulesController@getSchedulesDate');
