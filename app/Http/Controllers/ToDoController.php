@@ -30,8 +30,17 @@ class ToDoController extends Controller
     public function store(Request $request){
         $input = $request->all();
 
-        $task = Task::create($input);
-        return $task;
+        $task = new Task;
+        $task->task_name = $request -> task_name;
+        $task->status = $request -> status;
+        $task->date = $request -> date;
+        $task->user_id = $request -> user_id;
+        $task->calendar_id = $request -> calendar_id;
+
+        $task->save();
+
+        $id = $task->id;
+        return $id;
     }
 
     /**
@@ -58,7 +67,7 @@ class ToDoController extends Controller
      * @param id タスクID
      * @return json
      */
-    public function deleteTask($id){
+    public function delete($id){
         $task = Task::find($id);
         $task->delete();
 

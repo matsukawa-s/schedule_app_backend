@@ -38,8 +38,8 @@ Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
 
 Route::group(['prefix' => 'todo', 'middleware' => 'auth:api'], function(){
     Route::get('get/{id}', 'ToDoController@index');
-    Route::get('store', 'ToDoController@store');
-    Route::get('update/{id}', 'ToDoController@update');
+    Route::post('store', 'ToDoController@store');
+    Route::post('update/{id}', 'ToDoController@update');
     Route::get('delete/{id}', 'ToDoController@delete');
 });
 
