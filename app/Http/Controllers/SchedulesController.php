@@ -18,7 +18,7 @@ class SchedulesController extends Controller
      * @return json
      */
     public function index($id){
-        $schedules = \App\Schedule::where("calendar_id", $id)->get();
+        $schedules = \App\Schedule::where("calendar_id", $id)->orderby("start_date",'asc')->get();
 
         return response()->json($schedules);
     }
