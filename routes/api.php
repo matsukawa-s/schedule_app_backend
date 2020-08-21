@@ -36,6 +36,13 @@ Route::group(['prefix' => 'diary','middleware' => 'auth:api'], function () {
     Route::get('delete/{id}','DiaryController@delete');
 });
 
+Route::group(['prefix' => 'todo', 'middleware' => 'auth:api'], function(){
+    Route::get('get/{id}', 'ToDoController@index');
+    Route::post('store', 'ToDoController@store');
+    Route::post('update/{id}', 'ToDoController@update');
+    Route::get('delete/{id}', 'ToDoController@delete');
+});
+
 Route::group(['prefix' => 'calendar','middleware' => 'auth:api'], function () {
     Route::get('/get','CalendarController@getUserCalendar');
     Route::post('store','CalendarController@store');
