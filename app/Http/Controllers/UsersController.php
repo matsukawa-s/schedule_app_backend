@@ -36,12 +36,18 @@ class UsersController extends Controller
     //登録
     public function register(Request $request)
     {
+        $messages = [
+          'email.email' => 'メールアドレスを正しく入力してください',
+          'email.unique' => '入力されたメールアドレスはすでに使われています',
+        ];
+        
         // 入力チェック
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-        ]);
+        ],$messages);
+        
 
         if ($validator->fails()) {
           return response()->json([
