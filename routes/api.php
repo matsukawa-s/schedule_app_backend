@@ -47,7 +47,7 @@ Route::group(['prefix' => 'calendar','middleware' => 'auth:api'], function () {
     Route::get('/get','CalendarController@getUserCalendar');
     Route::post('store','CalendarController@store');
     Route::get('/delete/{id}','CalendarController@delete');
-    Route::post('/edit','CalendarController@editCalendarName');
+    Route::post('/edit/{id}','CalendarController@editCalendarName');
 });
 
 Route::get('/calendar/{id}','SchedulesController@index');
