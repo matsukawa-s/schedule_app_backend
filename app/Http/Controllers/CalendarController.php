@@ -32,4 +32,26 @@ class CalendarController extends Controller
         ]);
         return $data;
     }
+
+    /**
+     * ユーザーのカレンダーを削除する
+     */
+    public function delete($id){
+        $calendar = Calendar::find($id);
+        $calendar->delete();
+
+        return $calendar;
+    }
+
+    /**
+     * カレンダー名を変更する
+     */
+    public function editCalendarName($id,Request $request){
+        $input = $request->all();
+        $calendar = Calendar::find($id);
+        $calendar->cal_name = $input['editCalendarName'];
+        $calendar->save();
+
+        return $calendar;
+    }
 }
